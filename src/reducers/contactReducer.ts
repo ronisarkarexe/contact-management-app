@@ -1,8 +1,10 @@
+// contactReducer
 import {
   Contact,
   ContactAction,
   ADD_CONTACT,
   DELETE_CONTACT,
+  EDIT_CONTACT,
 } from "../actions/contactActions";
 
 export interface ContactState {
@@ -28,6 +30,13 @@ export const contactReducer = (
         ...state,
         contacts: state.contacts.filter(
           (contact) => contact.id !== action.payload
+        ),
+      };
+    case EDIT_CONTACT:
+      return {
+        ...state,
+        contacts: state.contacts.map((contact) =>
+          contact.id === action.payload.id ? action.payload : contact
         ),
       };
     default:
